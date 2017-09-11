@@ -22,6 +22,10 @@ git branch
 git push -u origin master
 refresh the page
 
+git remote -v
+//remove the remote origin
+git remote rm origin
+
 heroku command
 heroku
 heroku login
