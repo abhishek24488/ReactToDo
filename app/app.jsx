@@ -5,7 +5,7 @@ import { Router, Route,Switch, HashRouter} from 'react-router-dom';
 //var { Layout }= require('react-router');
 
 var Main= require('./Components/Main');
-
+//var ToDoApp= require('./ToDoApp');
 
 require('style-loader!css-loader!foundation-sites/dist/css/foundation.min.css');
 
@@ -15,6 +15,7 @@ require('style-loader!css-loader!sass-loader!!../app/style/app.scss');
 
 ReactDOM.render(
     <div>
+       
          <HashRouter>  
             <div>                
             <Route  path ="/" component={Main}/>                                             

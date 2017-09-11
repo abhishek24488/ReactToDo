@@ -1,16 +1,17 @@
 var React =require('react');
 var createReactClass = require('create-react-class');
 
+var ToDoApp= require('./ToDoApp');
 
 var Main=createReactClass({
     
     render: function() { 
         return( 
             <div>
-                      
+                 <ToDoApp/>     
             <div >
                 <div >                
-                        <p>Main Component</p>  
+                        <p>Main Component</p>                        
                         {this.props.children}      
                 </div>
             </div>            

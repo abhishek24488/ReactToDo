@@ -23,12 +23,18 @@ module.exports = {
         filename : './public/bundle.js'
     },
     resolve: {
-        
-       /*  alias:{
+
+        //root :__dirname,
+        /* modules:[
+            'node_modules',
+            './app/Components/'
+        ], */
+         alias:{/*
             Greeter : path.resolve( __dirname,'public/Components/Greeter.jsx'),
             GreeterForm : path.resolve( __dirname,'public/Components/GreeterForm.jsx'),
-            GreeterMessage : path.resolve( __dirname,'public/Components/GreeterMessage.jsx')
-        }, */
+            GreeterMessage : path.resolve( __dirname,'public/Components/GreeterMessage.jsx')*/
+            applicationStyles: 'app/style/app.scss'
+        }, 
         extensions: ['.js','.jsx']
     },
     /* 
