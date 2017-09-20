@@ -6,7 +6,7 @@
     var TodoList= createReactClass({
         
         render: function(){
-            var { todos }= this.props;
+            var { todos,nexText }= this.props;
             //console.log(todos);
             var renderTodos = ()=>{
                 //todo.map function call for every element in the array

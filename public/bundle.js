@@ -27459,10 +27459,10 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent,
 /***/ (function(module, exports, __webpack_require__) {
 
 var React = __webpack_require__(6);
-
 var createReactClass = __webpack_require__(63);
 
 var ToDoList = __webpack_require__(242);
+var AddTodo = __webpack_require__(249);
 
 var ToDoApp = createReactClass({
     displayName: 'ToDoApp',
@@ -27475,15 +27475,23 @@ var ToDoApp = createReactClass({
             }, {
                 id: 2,
                 text: 'Dinner'
+            }, {
+                id: 3,
+                text: 'Make a call'
+            }, {
+                id: 4,
+                text: 'Be ready at 4'
             }]
         };
     },
 
+    handleAddTodo: function (newText) {
+        alert('Yours new Added todo' + newText);
+    },
     render: function () {
 
         var that = this;
         var { todos } = this.state; // grab the todos value using state property
-
 
         //Its Important to return funtion 
         return React.createElement(
@@ -27494,7 +27502,8 @@ var ToDoApp = createReactClass({
                 null,
                 'Todo Application'
             ),
-            React.createElement(ToDoList, { todos: todos })
+            React.createElement(ToDoList, { todos: todos }),
+            React.createElement(AddTodo, { onAddTodo: this.handleAddTodo })
         );
     }
 });
@@ -27510,14 +27519,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 var React = __webpack_require__(6);
 var createReactClass = __webpack_require__(63);
 
-var Todo = __webpack_require__(249);
+var Todo = __webpack_require__(243);
 
 var TodoList = createReactClass({
     displayName: 'TodoList',
 
 
     render: function () {
-        var { todos } = this.props;
+        var { todos, nexText } = this.props;
         //console.log(todos);
         var renderTodos = () => {
             //todo.map function call for every element in the array
@@ -27542,7 +27551,41 @@ var TodoList = createReactClass({
 module.exports = TodoList;
 
 /***/ }),
-/* 243 */,
+/* 243 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var React = __webpack_require__(6);
+var createReactClass = __webpack_require__(63);
+
+var Todo = createReactClass({
+    displayName: 'Todo',
+
+
+    render: function () {
+        // We are fetching the text property using this.props
+        var { id, text } = this.props;
+        console.log(text);
+        var renderTodo = () => {
+            return;
+            React.createElement(
+                'div',
+                null,
+                text
+            );
+        };
+        return React.createElement(
+            'div',
+            null,
+            id,
+            '. ',
+            text
+        );
+    }
+});
+
+module.exports = Todo;
+
+/***/ }),
 /* 244 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27734,33 +27777,48 @@ exports.push([module.i, "", ""]);
 var React = __webpack_require__(6);
 var createReactClass = __webpack_require__(63);
 
-var Todo = createReactClass({
-    displayName: 'Todo',
+var AddTodo = createReactClass({
+    displayName: 'AddTodo',
 
+
+    onFormSubmit: function (e) {
+        e.preventDefault();
+        var task = this.refs.task.value;
+        console.log("AddTodDo Component" + task);
+        if (task.length > 0) {
+            this.refs.task.value = '';
+            this.props.onAddTodo(task);
+        } else {
+            // Moves cursor back 
+            this.refs.task.focus();
+        }
+    },
 
     render: function () {
-        // We are fetching the text property using this.props
-        var { id, text } = this.props;
-        console.log(text);
-        var renderTodo = () => {
-            return;
-            React.createElement(
-                'div',
-                null,
-                text
-            );
-        };
+
         return React.createElement(
             'div',
             null,
-            id,
-            '. ',
-            text
+            React.createElement(
+                'form',
+                { onSubmit: this.onFormSubmit },
+                React.createElement(
+                    'h3',
+                    null,
+                    'AddTODo'
+                ),
+                React.createElement('input', { type: 'text', placeholder: 'Enter the task', ref: 'task' }),
+                React.createElement(
+                    'button',
+                    { className: 'button expanded hollow' },
+                    'Add Todo'
+                )
+            )
         );
     }
 });
 
-module.exports = Todo;
+module.exports = AddTodo;
 
 /***/ })
 /******/ ]);
