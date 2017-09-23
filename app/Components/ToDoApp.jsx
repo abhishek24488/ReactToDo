@@ -1,5 +1,6 @@
 var React = require('react');
 var createReactClass = require('create-react-class');
+var uuid= require('node-uuid');
 
 var ToDoList= require('ToDoList');
 var AddTodo= require('AddTodo');
@@ -12,19 +13,19 @@ var ToDoApp= createReactClass({
             searchText: '',// You need to return all the items no matter what the text is :)
             todos: [
                 {
-                    id: 1,
+                    id: uuid(),
                     text:'Lunch'
                 },
                 {
-                    id: 2,
+                    id: uuid(),
                     text:'Dinner'
                 },
                 {
-                    id: 3,
+                    id: uuid(),
                     text:'Make a call'
                 },
                 {
-                    id: 4,
+                    id: uuid(),
                     text:'Be ready at 4'
                 }
             ]
@@ -32,7 +33,17 @@ var ToDoApp= createReactClass({
     },
 
     handleAddTodo: function(newText){
-        alert('Yours new Added todo' + newText);
+        //alert('Yours new Added todo' + newText);
+
+        this.setState({
+            todos:[
+                ...this.state.todos,
+                {
+                    id: uuid(),
+                    text: newText
+                }
+            ]
+        })
     },
     handleSearch: function(showCompleted, searchText){
         this.setState({

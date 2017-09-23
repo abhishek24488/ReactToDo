@@ -27,6 +27,7 @@
     "foundation-sites": "^6.4.3",
     "jquery": "^3.2.1",
     "node-sass": "^4.5.3",
+    "node-uuid": "^1.4.8",
     "sass-loader": "^6.0.6",
     "script-loader": "^0.7.0",
     "style-loader": "^0.18.2",
