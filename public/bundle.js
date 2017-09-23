@@ -27475,19 +27475,19 @@ var ToDoApp = createReactClass({
             searchText: '', // You need to return all the items no matter what the text is :)
             todos: [{
                 id: uuid(),
-                text: 'Lunch',
+                text: 'Meeting Anne Hathaway at 4 pm  on Monday',
                 completed: false
             }, {
                 id: uuid(),
-                text: 'Dinner',
+                text: 'Meeting Emily Blunt at 4 pm on Tuesday ',
                 completed: true
             }, {
                 id: uuid(),
-                text: 'Make a call',
+                text: 'Buy a Home in PAO ALTO :) :) and a claasy jaguar',
                 completed: false
             }, {
                 id: uuid(),
-                text: 'Be ready at 4',
+                text: 'Wake up at 4 AM and do yoga',
                 completed: false
             }]
         };
