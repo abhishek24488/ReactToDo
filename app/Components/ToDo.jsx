@@ -5,20 +5,23 @@ var Todo= createReactClass({
     
     render: function(){   
         // We are fetching the text property using this.props
-        var {id , text}=this.props;
-        console.log(text );
-        var renderTodo =()=>{
+        var {completed,id , text}=this.props;
+        //console.log(text );
+       /*  var renderTodo =()=>{
             return
                 (
                     <div>
                          {text}
                     </div>
                 )
-        }
+        } */
         return(
-            <div>
+            <div onClick={()=>{
+                    this.props.onToggle(id); // It will pass the id in onToggle function 
+                }} >
                 {/* {renderTodo()} */}
-                {id}. {text}
+                <input type="checkbox" checked={completed}/>
+                {text}
             </div>
         )
     }
