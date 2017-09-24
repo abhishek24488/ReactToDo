@@ -31,7 +31,9 @@ module.exports = {
         modules:[
             'node_modules',
             //'./app/Components'
-            path.resolve(__dirname, "./app/Components"), "node_modules"
+            path.resolve(__dirname, "./app/Components"), "node_modules",
+            path.resolve(__dirname, "./app/api"), "node_modules"
+            //path.resolve(__dirname, "app/style/"), "node_modules"
         ], 
         //Replace modules with other modules or paths.
          alias:{
@@ -53,7 +55,13 @@ module.exports = {
                  },
                 test: /\.jsx?$/,  // specify the folder wich we wannna parse
                 exclude:/(node_modules|bower_components)/
-            }           
+            }  ,
         ]
-    }   
+    }/* ,
+    sassLoader: {
+    includePaths: [
+      path.resolve(__dirname, './node_modules/foundation-sites/scss')
+    ]
+  }, */
+    
 };

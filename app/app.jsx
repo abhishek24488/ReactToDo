@@ -10,7 +10,8 @@ require('style-loader!css-loader!foundation-sites/dist/css/foundation.min.css');
 
 $(document).foundation();
 
-require('style-loader!css-loader!sass-loader!!../app/style/app.scss');
+//require('style-loader!css-loader!sass-loader!!../app/style/app.scss');
+require('style-loader!css-loader!sass-loader!../app/style/app.scss')
 
 ReactDOM.render(
     <div>                

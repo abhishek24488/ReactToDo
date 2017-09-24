@@ -14,12 +14,12 @@ var TodoSearch= createReactClass({
            <div>
                 <div>
                     <input type="text" ref="searchText"placeholder="search" onChange={this.handleSearch}/>
-                    <button className="button expanded hollow"> Serach your Task  </button>
+                    
                 </div>
                 <div>
                     <label>
                     <input type="checkbox" ref="showCompleted" onChange={this.handleSearch}/>
-                    Show Added task
+                    Show Completed task
                     </label>
                 </div>
            </div>
