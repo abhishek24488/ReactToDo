@@ -7,6 +7,7 @@ import { Router, Route,Switch, HashRouter} from 'react-router-dom';
 var ToDoApp= require('../app/Components/ToDoApp');
 
 require('style-loader!css-loader!foundation-sites/dist/css/foundation.min.css');
+require('style-loader!css-loader!foundation-sites/dist/css/foundation-float.css');
 
 $(document).foundation();
 
