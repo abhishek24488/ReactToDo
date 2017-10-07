@@ -33,13 +33,18 @@ module.exports = {
             //'./app/Components'
             path.resolve(__dirname, "./app/Components"), "node_modules",
             path.resolve(__dirname, "./app/api"), "node_modules",
-            path.resolve(__dirname, "./app/actions"), "node_modules"
+            path.resolve(__dirname, "./app/actions"), "node_modules",
+            path.resolve(__dirname,"./app/reducers"), "node_modules",
+            path.resolve(__dirname,"./app/store"), "node_modules"
             //path.resolve(__dirname, "app/style/"), "node_modules"
         ], 
         //Replace modules with other modules or paths.
          alias:{
             //ToDoApp: path.resolve(__dirname, 'app/Components'),
-            applicationStyles: 'app/style/app.scss'
+            applicationStyles: 'app/style/app.scss',
+            actions:path.resolve(__dirname, "./app/actions/actions.jsx"),
+            reducers:path.resolve(__dirname,"./app/reducers/reducers.jsx"),
+            configureStore:path.resolve(__dirname,"./app/store/configureStore.jsx")
         }, 
         //which is what enables users to leave off the extension when importing:
         extensions: ['.js','.jsx']
@@ -52,7 +57,7 @@ module.exports = {
             {
                  loader: 'babel-loader',
                  query: {                   // passing the data into bable loader and tell them to what exactly require
-                     presets: ['react','es2017']// presets are built in bablel
+                     presets: ['react','es2017','stage-3']// presets are built in bablel
                  },
                 test: /\.jsx?$/,  // specify the folder wich we wannna parse
                 exclude:/(node_modules|bower_components)/

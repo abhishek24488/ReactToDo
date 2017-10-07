@@ -43,6 +43,6 @@ npm install --save-dev css-loader
 npm install --save-dev style-loader
 npm install --save-dev script-loader
 npm install --ssave-dev jquery foundation-sites
-
+npm install --save-dev babel-preset-stage-3
 //
 npm install node-uuid --save-dev

@@ -3,8 +3,18 @@ var ReactDOM = require('react-dom');
 import { Router, Route,Switch, HashRouter} from 'react-router-dom';
 //var { Layout }= require('react-router');
 
-var ToDoApp= require('./Components/ToDoApp');
-var Home= require('./Components/Home');
+var ToDoApp= require('ToDoApp');
+var actions= require('actions');
+var store= require('configureStore').configure();
+
+store.subscribe(()=>{
+    console.log('New State',store.getState());
+
+});
+
+store.dispatch(actions.addTodo('clean mess'));
+store.dispatch(actions.toggleShowCompletedTodo());
+store.dispatch(actions.setSerachText('mess'));
 
 
 require('style-loader!css-loader!foundation-sites/dist/css/foundation.min.css');

@@ -11,24 +11,24 @@ export var setSerachText= (searchText) => {
 
 // toggle completed todo
 
-export var toggleCompletedTodo = (id) => {
+export var toggleTodo = (id) => {
   return { 
-    type: 'Toggle Completed Todo',
+    type: 'TOGGLE_TODO',
     id
   };
 };
 
 export var addTodo = (text) => {
   return {
-    type: 'Add ToDo',
+    type: 'ADD_TODO',
     text
   };
 };
 
 //toggle Show Completed
-export var toggleCompletedTodo = () => {
+export var toggleShowCompleted = () => {
   return {
-    type : 'Toggle Show Completed',
+    type : 'TOGGLE_SHOW_COMPLETED',
     
   }
 }
