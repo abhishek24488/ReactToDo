@@ -32,3 +32,6 @@ export var toggleCompletedTodo = () => {
     
   }
 }
+
+
+//Actions are placed and now needed to add reducers to handle it
