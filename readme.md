@@ -10,6 +10,9 @@ git-scm.com
 3. git add .
 4. git commit -m ''
 
+
+git push -f origin master
+
 https://help.github.com/articles/connecting-to-github-with-ssh/
 follow the steps to ssh key to githu account
 
