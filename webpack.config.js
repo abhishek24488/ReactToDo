@@ -32,7 +32,8 @@ module.exports = {
             'node_modules',
             //'./app/Components'
             path.resolve(__dirname, "./app/Components"), "node_modules",
-            path.resolve(__dirname, "./app/api"), "node_modules"
+            path.resolve(__dirname, "./app/api"), "node_modules",
+            path.resolve(__dirname, "./app/actions"), "node_modules"
             //path.resolve(__dirname, "app/style/"), "node_modules"
         ], 
         //Replace modules with other modules or paths.
