@@ -3,6 +3,8 @@
 var webpack= require('webpack');
 var path = require('path');
 
+process.env.Node_ENV= process.env.Node_ENV || 'development';
+
 module.exports = {
     entry: [
         'script-loader!jquery/dist/jquery.min.js',
@@ -25,8 +27,8 @@ module.exports = {
     //output options tell Webpack how to write the compiled files to disk
     output: {
         path : __dirname,  // It for showing the current drectory//option determines the location on disk the files are written
-        filename : './public/bundle.js'
-        //publicPath: '/'
+        filename : './public/bundle.js',
+        publicPath: '/'
     },
     //Options affecting the resolving of modules
     resolve: {
@@ -68,11 +70,12 @@ module.exports = {
                 exclude:/(node_modules|bower_components)/
             }  ,
         ]
-    }/* ,
+    },/* ,
     sassLoader: {
     includePaths: [
       path.resolve(__dirname, './node_modules/foundation-sites/scss')
     ]
   }, */
     
+  devtool: process.env.Node_ENV === 'production'?  undefined: 'cheap-module-eval-source-map'
 };

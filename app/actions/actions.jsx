@@ -1,4 +1,4 @@
-import firebase,{firebaseRef, githubProvider} from "../firebase/firebase";
+import firebase,{firebaseRef, githubProvider,provider} from "../firebase/firebase";
 
 
 export var setSearchText= (searchText) => {
@@ -91,14 +91,19 @@ export var toggleShowCompleted = () => {
 }
 //Actions are placed and now needed to add reducers to handle it
 
-export var startLogin= ()=> {
+export var startLogin= (username,password)=> {
   return (dispatch,getState) => {
     //which provider wannna login
-    firebase.auth().signInWithPopup(githubProvider).then((result)=>{
+    /* firebase.auth().signInWithPopup(githubProvider).then((result)=>{
       console.log("Authentication Workd", result);
     }, (error)=>{
       console.log("Unable to auth", error);
-    });
+    }); */
+    firebase.auth().signInWithEmailAndPassword(username,password).then((result)=>{
+      console.log("Authentication Workd", result);
+    }, (error)=>{
+      console.log("Unable to auth", error);
+    })
   };
 };
 
