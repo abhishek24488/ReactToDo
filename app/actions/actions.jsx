@@ -1,8 +1,5 @@
 
-
-
-
-export var setSerachText= (searchText) => {
+export var setSearchText= (searchText) => {
   return { // action object
     type: 'SET_SEARCH_TEXT',
     searchText
@@ -11,7 +8,7 @@ export var setSerachText= (searchText) => {
 
 // toggle completed todo
 
-export var toggleTodo = (id) => {
+export var toggleTodo = (id) => { 
   return { 
     type: 'TOGGLE_TODO',
     id
@@ -32,6 +29,4 @@ export var toggleShowCompleted = () => {
     
   }
 }
-
-
 //Actions are placed and now needed to add reducers to handle it

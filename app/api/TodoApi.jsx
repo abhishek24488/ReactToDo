@@ -30,7 +30,8 @@ module.exports = {
 
     filterTodos: function(todos, searchText, showCompleted){
         var filterTodos = todos;
-
+        console.log("filtertodos==="+filterTodos);
+        console.log("searchText=="+searchText);
         // filter by showCompleted filter accepts upto three callback and calls only one for every item in an array
         filterTodos = filterTodos.filter((todo)=>{
             return !todo.completed || showCompleted; // Toshow completed & non-completed when we checked the checkbox
@@ -38,7 +39,7 @@ module.exports = {
         // filter by search text
         filterTodos = filterTodos.filter((todo)=>{
             var text = todo.text.toLowerCase();
-            return searchText.length === 0 || text.indexOf(searchText) > -1;
+           return searchText.length === 0 || text.indexOf(searchText) > -1;
         })
 
         //Sort todo task by non completed

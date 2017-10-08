@@ -24,15 +24,15 @@ export var todosReducer = (state = [], action ) => {
         case 'ADD_TODO':
             return [
                 ...state,
-                {
+                 {
                     id: uuid(),
                     text: action.text,
                     completed: false
-                } 
+                }  
                 //...action.todo
             ];
 
-        case 'TOGGLE_TODO':
+         case 'TOGGLE_TODO':
             return state.map((todo) =>   {
                 if(todo.id === action.id){
                     var nextCompleted=  !todo.completed;
@@ -40,11 +40,17 @@ export var todosReducer = (state = [], action ) => {
                         ...todo,                                               
                         completed: nextCompleted
                     };
-                }
-                
-            });
+                }    else{
+                    //return [...state];
+                    return {
+                        //...todo 
+                        ...todo
+                };
+                }              
+            }); 
         default:
-            return 
-                state;            
+            return [
+                ...state
+            ];       
     };
 };

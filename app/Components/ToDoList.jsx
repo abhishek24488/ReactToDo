@@ -1,26 +1,39 @@
     var React= require('react');
+    var {connect}= require('react-redux');// provider component acces to children component and childer still needs to specify which data it needde
     var createReactClass = require('create-react-class');
 
     var Todo = require('Todo');
-
+    var TodoApi =require('TodoApi');
     var TodoList= createReactClass({
         
         render: function(){
             // Using ES6 destructuring property
-            var { todos,nexText }= this.props;
-            //console.log(todos);
+            var { todos,searchText, showCompleted }= this.props;
+            //console.log(typeof(todos));
+            console.log("Todos=="+todos);
             var renderTodos = ()=>{
                 //todo.map function call for every element in the array
                 // when we are iterating an array and generating multiple instance then we need provide some key
-                return todos.map((todo)=>{
-                    //console.log(todo);
+               /*   return todos.map((todo)=>{
+                    console.log(todo);
                     return(
-//spreadout operator is help us to spread the all property on an object . Now Every attribute todo in map method will pass down  
-//todo component as its own prop i.e. we can grab the text prop          
-            <Todo key ={todo.id} {...todo} onToggle={this.props.onToggle} />  //used this.props Since we are passing from parent component
+            <Todo key ={todo.id} {...todo}/>  //used this.props Since we are passing from parent component
                     );
-                });
-            }
+                }); */
+                
+                 if(todos.length===0){
+                    return(
+                        <p className="container_message">Nothing to do</p>
+                    );
+                }else {
+                return TodoApi.filterTodos(todos,searchText, showCompleted).map((todo)=>{
+                    console.log("dsjf"+todo);
+                        return (
+                            <Todo key ={todo.id} {...todo}/>
+                        );
+                    });
+                }
+            };
             return(
                 <div>
                     {renderTodos()}
@@ -29,4 +42,13 @@
         }
     });
 
-    module.exports= TodoList;
+    module.exports= connect( 
+         (state) => {
+            return {               
+            ...state
+            ///todos: state.todos
+            } //state => ({todos: state.todos})
+    })(TodoList);
+//todos: state
+//spreadout operator is help us to spread the all property on an object . Now Every attribute todo in map method will pass down  
+//todo component as its own prop i.e. we can grab the text prop          

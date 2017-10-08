@@ -1,8 +1,8 @@
-//var redux = require('redux');
+var redux = require('redux');
 
-//var {searchTextReducer,showCompletedReducer,todosReducer}= require('reducers');
-import * as redux from "redux";
-import {searchTextReducer, showCompletedReducer, todosReducer, authReducer} from "reducers";
+var {searchTextReducer,showCompletedReducer,todosReducer}= require('reducers');
+//import * as redux from "redux";
+//import {searchTextReducer, showCompletedReducer, todosReducer, authReducer} from "reducers";
 
 
 export var configure=()=> {
@@ -11,10 +11,10 @@ export var configure=()=> {
         showCompleted: showCompletedReducer,
         todos: todosReducer
     });
-
+    
     var store = redux.createStore(reducer, redux.compose(
         window.devToolsExtension ? window.devToolsExtension() : f => f
     )) ;
 
-    return store
+    return store;
 };

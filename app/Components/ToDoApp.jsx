@@ -11,17 +11,17 @@ var TodoApi = require('TodoApi');
 var ToDoApp= createReactClass({
     getInitialState: function(){
         return {
-            showCompleted: false,// false because we aonly want to see todos which is not yet finished
+            showCompleted: true,// false because we only want to see todos which is not yet finished
             searchText: '',// You need to return all the items no matter what the text is :)
             todos: TodoApi.getTodos() // to fetch the todos            
         };
     },
     // Its going fire after either props or states gonna change
     componentDidUpdate : function(){
-        console.log(this.state.todos);
+        //console.log(this.state.todos);
         TodoApi.setTodos(this.state.todos);
-    },
-    handleAddTodo: function(newText){
+    }, 
+    /* handleAddTodo: function(newText){
         //alert('Yours new Added todo' + newText);
 
         this.setState({
@@ -34,8 +34,8 @@ var ToDoApp= createReactClass({
                 }
             ]
         })
-    },
-    handleToggle:function(id){
+    }, */
+    /* handleToggle:function(id){
         //alert(id);
         // map function going to iterate all over the todo task
         var updatedTodos= this.state.todos.map(function(todo){
@@ -47,25 +47,25 @@ var ToDoApp= createReactClass({
         this.setState({
             todos: updatedTodos
         });  
-    },
-    handleSearch: function(showCompleted, searchText){
-        this.setState({
-            showCompleted:showCompleted,
-            searchText:searchText.toLowerCase()
-        });
-       /*  var serachTodo= this.state.todos.map(function(todo){
-            if(todo.text === searchText){
-                console.log(searchText);
-            }
-        }); */
-         
-    },
+    }, */
+    /* handleSearch: function(showCompleted, searchText){
+            this.setState({
+                showCompleted:showCompleted,
+                searchText:searchText.toLowerCase()
+            }); */
+    /*var serachTodo= this.state.todos.map(function(todo){
+                if(todo.text === searchText){
+                    console.log(searchText);
+                }
+            }); 
+            
+            },*/
     render: function(){
 
         var that = this;
         var {todos,searchText, showCompleted}= this.state; // grab the todos value using state property
-
-        var filterTodos= TodoApi.filterTodos(todos, searchText, showCompleted);
+        console.log(searchText);
+        var filterTodos= TodoApi.filterTodos(todos,searchText, showCompleted);
 
         //Its Important to return funtion 
        return(
@@ -74,9 +74,9 @@ var ToDoApp= createReactClass({
             <div className="row">
                 <div className="column small-centered small-11 medium-6 large-5">
                     <div className="container">                        
-                        <TodoSearch onSearch={this.handleSearch}></TodoSearch>
-                        <ToDoList todos ={filterTodos} onToggle={this.handleToggle} />
-                        <AddTodo onAddTodo={this.handleAddTodo}/>
+                        <TodoSearch/>
+                        <ToDoList/>
+                        <AddTodo/>
                     </div>
                 </div>
             </div>
@@ -85,4 +85,5 @@ var ToDoApp= createReactClass({
     }
 });
 
+//export default ToDoApp;
 module.exports=ToDoApp;
