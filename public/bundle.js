@@ -12208,7 +12208,8 @@ function decrypt (data, password) {
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSearchText", function() { return setSearchText; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toggleTodo", function() { return toggleTodo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "startToggleTodo", function() { return startToggleTodo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateTodo", function() { return updateTodo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addTodo", function() { return addTodo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addTodos", function() { return addTodos; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "startAddTodo", function() { return startAddTodo; });
@@ -12227,10 +12228,23 @@ var setSearchText = searchText => {
 
 // toggle completed todo
 
-var toggleTodo = id => {
+var startToggleTodo = (id, completed) => {
+  return (dispatch, getState) => {
+    var todoRef = __WEBPACK_IMPORTED_MODULE_0__firebase_firebase__["a" /* firebaseRef */].child(`todos/{id}`);
+    var updates = {
+      completed
+    };
+    return todoRef.update(updates).then(() => {
+      dispatch(updateTodo(id, updates));
+    });
+  };
+};
+
+var updateTodo = (id, updates) => {
   return {
     type: 'TOGGLE_TODO',
-    id
+    id,
+    updates
   };
 };
 
@@ -52699,7 +52713,7 @@ var Todo = createReactClass({
             'div',
             { className: todoClassName, onClick: () => {
                     // this.props.onToggle(id); // It will pass the id in onToggle function 
-                    dispatch(actions.toggleTodo(id));
+                    dispatch(actions.startToggleTodo(id, !completed));
                 } },
             React.createElement('input', { type: 'checkbox', checked: completed, onChange: () => {} }),
             text
@@ -52897,10 +52911,12 @@ var todosReducer = (state = TodoApi.getTodos(), action) => {
         case 'TOGGLE_TODO':
             return state.map(todo => {
                 if (todo.id === action.id) {
-                    var nextCompleted = !todo.completed;
-                    return _extends({}, todo, {
+                    /* var nextCompleted=  !todo.completed;
+                    return {  
+                        ...todo,                                               
                         completed: nextCompleted
-                    });
+                    }; */
+                    return _extends({}, todo, action.updates);
                 } else {
                     //return [...state];
                     return todo;

@@ -35,11 +35,15 @@ export var todosReducer = (state = TodoApi.getTodos(), action ) => {
         case 'TOGGLE_TODO':
             return state.map((todo) =>   {
                 if(todo.id === action.id){
-                    var nextCompleted=  !todo.completed;
+                    /* var nextCompleted=  !todo.completed;
                     return {  
                         ...todo,                                               
                         completed: nextCompleted
-                    };
+                    }; */
+                    return {
+                        ...todo,
+                        ...action.updates
+                    }
                 }    else{
                     //return [...state];
                     return todo;
