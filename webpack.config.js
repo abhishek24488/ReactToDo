@@ -13,6 +13,9 @@ module.exports = {
     externals:{
         'jquery':'jQuery'
     },
+    devServer:{
+        historyApiFallback: true
+    },
     plugins:[
         new webpack.ProvidePlugin({
             '$':'jquery',  //When we see $ we gonna use jquery module
@@ -23,6 +26,7 @@ module.exports = {
     output: {
         path : __dirname,  // It for showing the current drectory//option determines the location on disk the files are written
         filename : './public/bundle.js'
+        //publicPath: '/'
     },
     //Options affecting the resolving of modules
     resolve: {
