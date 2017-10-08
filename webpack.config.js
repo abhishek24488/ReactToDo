@@ -44,7 +44,7 @@ module.exports = {
            // applicationStyles: path.resolve(__dirname, "./app/style/app.scss"),
             actions:path.resolve(__dirname, "./app/actions/actions.jsx"),
             reducers:path.resolve(__dirname,"./app/reducers/reducers.jsx"),
-            firebase:path.resolve(__dirname,"./app/firebase/firebase.jsx"),
+            //firebase:path.resolve(__dirname,"./app/firebase/firebase.jsx"),
             configureStore:path.resolve(__dirname,"./app/store/configureStore.jsx")
         }, 
         //which is what enables users to leave off the extension when importing:

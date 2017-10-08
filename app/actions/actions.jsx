@@ -1,4 +1,4 @@
-import firebase,{firebaseRef} from "../firebase/firebase";
+import firebase,{firebaseRef, githubProvider} from "../firebase/firebase";
 
 
 export var setSearchText= (searchText) => {
@@ -44,6 +44,26 @@ export var addTodos = (todos) => {
   };
 };
 
+ export var startAddTodos = () => {
+  return (dispatch, getState)=>{
+    var todosRef= firebaseRef.child('todos').push(todo);
+
+    return todosRef.once('value').then((snapshot)=>{
+      var todos= snapshot.val()|| {};
+      var parsedTodos =[];
+
+      Object.keys(todos).forEach((todoId)=> {
+        parsedTodos.push({
+            id: todoId,
+            ...todos[todoId]
+          });
+      });
+
+      dispatch(addTodos(parsedTodos));  
+    });
+  };
+} 
+
 export var startAddTodo = (text) => {
   return (dispatch, getState)=>{
     var todo ={
@@ -70,3 +90,22 @@ export var toggleShowCompleted = () => {
   }
 }
 //Actions are placed and now needed to add reducers to handle it
+
+export var startLogin= ()=> {
+  return (dispatch,getState) => {
+    //which provider wannna login
+    firebase.auth().signInWithPopup(githubProvider).then((result)=>{
+      console.log("Authentication Workd", result);
+    }, (error)=>{
+      console.log("Unable to auth", error);
+    });
+  };
+};
+
+export var startLogout= ()=> {
+  return (dispatch,getState) => {
+    firebase.auth().signOut().then(()=>{
+      console.log("Logged Out");
+    });
+  };
+};

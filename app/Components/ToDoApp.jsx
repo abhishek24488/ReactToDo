@@ -1,10 +1,12 @@
 var React = require('react');
+var {connect}= require('react-redux');
 var createReactClass = require('create-react-class');
 var uuid= require('node-uuid');
 
 var ToDoList= require('ToDoList');
 var AddTodo= require('AddTodo');
 var TodoSearch = require('TodoSearch');
+var actions= require('actions');
 //var TodoApi = require('TodoApi');
 
 
@@ -60,6 +62,13 @@ var ToDoApp= createReactClass({
             }); 
             
             },*/
+
+    onLogout(e){
+        var {dispatch} = this.props;
+        e.preventDefault();
+        dispatch(actions.startLogout());
+    },
+    
     render: function(){        
         //var {todos,searchText, showCompleted}= this.state; // grab the todos value using state property
         //console.log(searchText);
@@ -67,7 +76,11 @@ var ToDoApp= createReactClass({
 
         //Its Important to return funtion 
        return(
+
         <div>
+            <div className="page-actions">
+                <a herf="#" onClick={this.onLogout}>Logout</a>
+            </div>
             <h1 className="page-title">Todo App</h1>
             <div className="row">
                 <div className="column small-centered small-11 medium-6 large-5">
@@ -84,4 +97,4 @@ var ToDoApp= createReactClass({
 });
 
 //export default ToDoApp;
-module.exports=ToDoApp;
+module.exports=connect()(ToDoApp);
