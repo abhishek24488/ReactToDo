@@ -13,7 +13,7 @@ var AddTodo= createReactClass({
         if(task.length>0){
             this.refs.task.value= '';
             //this.props.onAddTodo(task);
-            dispatch(actions.addTodo(task));
+            dispatch(actions.startAddTodo(task));
         }else{
     // Moves cursor back 
             this.refs.task.focus();

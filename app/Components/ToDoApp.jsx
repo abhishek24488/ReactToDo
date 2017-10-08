@@ -5,22 +5,22 @@ var uuid= require('node-uuid');
 var ToDoList= require('ToDoList');
 var AddTodo= require('AddTodo');
 var TodoSearch = require('TodoSearch');
-var TodoApi = require('TodoApi');
+//var TodoApi = require('TodoApi');
 
 
 var ToDoApp= createReactClass({
-    getInitialState: function(){
+    /* getInitialState: function(){
         return {
             showCompleted: true,// false because we only want to see todos which is not yet finished
             searchText: '',// You need to return all the items no matter what the text is :)
             todos: TodoApi.getTodos() // to fetch the todos            
         };
-    },
+    }, */
     // Its going fire after either props or states gonna change
-    componentDidUpdate : function(){
+   /*  componentDidUpdate : function(){
         //console.log(this.state.todos);
         TodoApi.setTodos(this.state.todos);
-    }, 
+    },  */
     /* handleAddTodo: function(newText){
         //alert('Yours new Added todo' + newText);
 
@@ -60,12 +60,10 @@ var ToDoApp= createReactClass({
             }); 
             
             },*/
-    render: function(){
-
-        var that = this;
-        var {todos,searchText, showCompleted}= this.state; // grab the todos value using state property
-        console.log(searchText);
-        var filterTodos= TodoApi.filterTodos(todos,searchText, showCompleted);
+    render: function(){        
+        //var {todos,searchText, showCompleted}= this.state; // grab the todos value using state property
+        //console.log(searchText);
+        //var filterTodos= TodoApi.filterTodos(todos,searchText, showCompleted);
 
         //Its Important to return funtion 
        return(

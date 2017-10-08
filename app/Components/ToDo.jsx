@@ -25,7 +25,7 @@ var Todo= createReactClass({
                    dispatch(actions.toggleTodo(id));
                 }} >
                 {/* {renderTodo()} */}
-                <input type="checkbox" checked={completed}/>
+                <input type="checkbox" checked={completed} onChange={()=>{}}/>
                 {text}
             </div>
         )

@@ -9,14 +9,24 @@ var ToDoApp= require('ToDoApp');
 var actions= require('actions');
 //var applicationStyles = require('applicationStyles');
 var store= require('configureStore').configure();
+var TodoApi = require('TodoApi');
 
+var IntializeTodos = TodoApi.getTodos();
+
+store.dispatch(actions.addTodos(IntializeTodos));
 store.subscribe(()=>{
-    console.log('New State',store.getState());
-
+    var state = store.getState();
+    console.log('New State',state);
+    TodoApi.setTodos(state.todos);
 });
 
-store.dispatch(actions.addTodo('clean mess'));
-store.dispatch(actions.toggleShowCompleted());
+//var IntializeTodos = TodoApi.getTodos();
+
+console.log("IntializeTodos"+IntializeTodos);
+//store.dispatch(actions.addTodos(IntializeTodos));
+
+//store.dispatch(actions.addTodo('clean mess'));
+//store.dispatch(actions.toggleShowCompleted());
 //store.dispatch(actions.setSearchText('m'));
 //store.dispatch(actions.toggleTodo('eb310554-38b1-4f52-8256-a581a2321a0d'));
 

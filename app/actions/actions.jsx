@@ -1,3 +1,5 @@
+import firebase,{firebaseRef} from "../firebase/firebase";
+
 
 export var setSearchText= (searchText) => {
   return { // action object
@@ -15,12 +17,37 @@ export var toggleTodo = (id) => {
   };
 };
 
-export var addTodo = (text) => {
+export var addTodo = (todo) => {
   return {
     type: 'ADD_TODO',
-    text
+    todo
   };
 };
+
+export var addTodos = (todos) => {
+  return {
+    type: 'ADD_TODOS',
+    todos
+  };
+};
+
+export var startAddTodo = (text) => {
+  return (dispatch, getState)=>{
+    var todo ={
+      //id: uuid(),
+      //text: action.text,
+      text,
+      completed: false
+    };
+    var todoRef= firebaseRef.child('todos').push(todo);
+    return todoRef.then(()=>{
+      dispatch(addTodo({
+        ...todo,
+        id: todoRef.key
+      }));
+    })
+  };
+}
 
 //toggle Show Completed
 export var toggleShowCompleted = () => {

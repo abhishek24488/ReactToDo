@@ -1,6 +1,6 @@
 var uuid= require('node-uuid');
 //var React= require('react');
-
+var TodoApi = require('TodoApi')
 export var searchTextReducer = ( state= '',action)=> {
     switch(action.type) {
         case 'SET_SEARCH_TEXT':
@@ -19,20 +19,20 @@ export var showCompletedReducer = ( state = false, action )=> {
     };
 };
 
-export var todosReducer = (state = [], action ) => {
+export var todosReducer = (state = TodoApi.getTodos(), action ) => {
     switch(action.type){
         case 'ADD_TODO':
             return [
                 ...state,
-                 {
+                /*  {
                     id: uuid(),
                     text: action.text,
                     completed: false
-                }  
-                //...action.todo
+                }  */ 
+                {...action.todo}
             ];
 
-         case 'TOGGLE_TODO':
+        case 'TOGGLE_TODO':
             return state.map((todo) =>   {
                 if(todo.id === action.id){
                     var nextCompleted=  !todo.completed;
@@ -42,12 +42,19 @@ export var todosReducer = (state = [], action ) => {
                     };
                 }    else{
                     //return [...state];
-                    return {
-                        //...todo 
-                        ...todo
-                };
+                    return todo;
+                    /* return {
+                        ...todo // both will work
+                        //todo
+                }; */
                 }              
             }); 
+        
+            CASE: 'ADD_TODOS'
+            return [
+                ...state,
+                ...action.todos
+            ];
         default:
             return [
                 ...state

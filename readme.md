@@ -46,3 +46,5 @@ npm install --ssave-dev jquery foundation-sites
 npm install --save-dev babel-preset-stage-3
 //
 npm install node-uuid --save-dev
+
+redux-thunk is middleware
