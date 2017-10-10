@@ -12,31 +12,31 @@ import history from "../app/History/history";
 import {Router, HashRouter, Route} from "react-router-dom";
 var ToDoApp= require('ToDoApp');
 var actions= require('actions');
-//var applicationStyles = require('applicationStyles');
+
 var store= require('configureStore').configure();
 var TodoApi = require('TodoApi');
 var Login = require('Login');
-//import router from '../app/Router/index';
+
 
 firebase.auth().onAuthStateChanged((user)=>{
     if (user) {
-        history.push('/todos');
-        //<Redirect to="/todos" />
+        //store.dispatch(actions.login(user.uid));
+        store.dispatch(actions.startAddTodos());
+        history.push('/todos');        
     } else {
-        history.push('/');
-       // <Redirect to="/" />
+        store.dispatch(actions.logout());
+        history.push('/');       
     }
-
 });
 
-var IntializeTodos = TodoApi.getTodos();
 
+/*var IntializeTodos = TodoApi.getTodos(); 
 store.dispatch(actions.addTodos(IntializeTodos));
 store.subscribe(()=>{
     var state = store.getState();
     console.log('New State',state);
     TodoApi.setTodos(state.todos);
-}); 
+});  */
 
 
 require('style-loader!css-loader!foundation-sites/dist/css/foundation.min.css');

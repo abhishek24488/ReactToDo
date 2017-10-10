@@ -19,7 +19,7 @@ export var showCompletedReducer = ( state = false, action )=> {
     };
 };
 
-export var todosReducer = (state = TodoApi.getTodos(), action ) => {
+export var todosReducer = (state = [], action ) => {
     switch(action.type){
         case 'ADD_TODO':
             return [
@@ -43,25 +43,34 @@ export var todosReducer = (state = TodoApi.getTodos(), action ) => {
                     return {
                         ...todo,
                         ...action.updates
-                    }
-                }    else{
-                    //return [...state];
-                    return todo;
-                    /* return {
-                        ...todo // both will work
-                        //todo
-                }; */
-                }              
+                    };
+                }     else{                    
+                    return todo;                     
+                    }              
             }); 
         
-            CASE: 'ADD_TODOS'
+            case 'ADD_TODOS':
             return [
                 ...state,
                 ...action.todos
             ];
-        default:
-            return [
-                ...state
-            ];       
+            case 'LOGOUT':
+            return [];
+          default:
+            return state;
+             
     };
 };
+
+ export var authReducer = (state = {}, action) => {
+    switch (action.type) {
+      case 'LOGIN':
+        return {
+          uid: action.uid
+        };
+      case 'LOGOUT':
+        return {};
+      default:
+        return state;
+    }
+  }; 

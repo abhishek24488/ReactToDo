@@ -1,8 +1,7 @@
 var $ = require('jquery');
 
-
 module.exports = {
-     setTodos: function (todos) {
+    /*  setTodos: function (todos) {
         if($.isArray(todos)){
             localStorage.setItem('todos',JSON.stringify(todos));
             console.log(todos);
@@ -27,11 +26,9 @@ module.exports = {
             return [];
         } 
     }, 
-
+ */
     filterTodos: function(todos, searchText, showCompleted){
         var filterTodos = todos;
-        //console.log("filtertodos==="+filterTodos);
-        //console.log("searchText=="+searchText);
         // filter by showCompleted filter accepts upto three callback and calls only one for every item in an array
         filterTodos = filterTodos.filter((todo)=>{
             return !todo.completed || showCompleted; // Toshow completed & non-completed when we checked the checkbox
@@ -41,7 +38,6 @@ module.exports = {
            var text = todo.text.toLowerCase();
            return searchText.length === 0 || text.indexOf(searchText) > -1;
         })
-
         //Sort todo task by non completed
         filterTodos=filterTodos.sort((a,b)=>{
             if(!a.completed && b.completed)
@@ -51,8 +47,6 @@ module.exports = {
             else
                 return 0;
         })
-
-
         return filterTodos;
     }
 };

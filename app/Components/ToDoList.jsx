@@ -9,18 +9,10 @@
         render: function(){
             // Using ES6 destructuring property
             var { todos,searchText, showCompleted }= this.props;
-            //console.log(typeof(todos));
-            console.log("Todos=="+todos);
-            
+                        
             var renderTodos = ()=>{
                 //todo.map function call for every element in the array
                 // when we are iterating an array and generating multiple instance then we need provide some key
-               /*   return todos.map((todo)=>{
-                    console.log(todo);
-                    return(
-            <Todo key ={todo.id} {...todo}/>  //used this.props Since we are passing from parent component
-                    );
-                }); */
                 var filteredTodos =TodoApi.filterTodos(todos,searchText, showCompleted);
                 if(filteredTodos.length===0){
                     return(
@@ -28,12 +20,10 @@
                     );
                 } 
                 return filteredTodos.map((todo)=>{
-                    //console.log("dsjf"+todo);
                         return (
                             <Todo key ={todo.id} {...todo}/>
                         );
-                    });
-                
+                    });                
             };
             return(
                 <div>
@@ -45,11 +35,11 @@
 
     module.exports= connect( 
          (state) => {
-             return state;
-           /*  return {               
+             //return state;
+                return {               
             ...state
             ///todos: state.todos
-            } */ //state => ({todos: state.todos})
+            };    //state => ({todos: state.todos})
     })(TodoList);
 //todos: state
 //spreadout operator is help us to spread the all property on an object . Now Every attribute todo in map method will pass down  

@@ -2,12 +2,12 @@ import  firebase  from "firebase";
 
 try{
     var config = {
-        apiKey: "AIzaSyCpPvYzwiH1_47KzaltpRDiJHvt3LcCV0k",
-        authDomain: "todo-app-175f2.firebaseapp.com",
-        databaseURL: "https://todo-app-175f2.firebaseio.com",
-        projectId: "todo-app-175f2",
-        storageBucket: "todo-app-175f2.appspot.com",
-        messagingSenderId: "271805320127"
+        apiKey: "AIzaSyA7pqLfe70sPiLmphJuVXmEm5fbHmjeGhI",
+        authDomain: "abhi-todo.firebaseapp.com",
+        databaseURL: "https://abhi-todo.firebaseio.com",
+        projectId: "abhi-todo",
+        storageBucket: "abhi-todo.appspot.com",
+        messagingSenderId: "41378217390"
       };
   firebase.initializeApp(config);
     }

@@ -12,13 +12,14 @@ export var setSearchText= (searchText) => {
 
 export var startToggleTodo = (id, completed) => { 
   return (dispatch, getState)=>{ 
-    var todoRef = firebaseRef.child(`todos/{id}`);
+    //var uid = getState().auth.uid;
+    var todoRef = firebaseRef.child(`todos/${id}`);
     var updates ={
       completed
     };
     return todoRef.update(updates).then(()=>{
       dispatch(updateTodo(id,updates));
-    })
+    });
   };
 };
 
@@ -46,7 +47,8 @@ export var addTodos = (todos) => {
 
  export var startAddTodos = () => {
   return (dispatch, getState)=>{
-    var todosRef= firebaseRef.child('todos').push(todo);
+    //var uid = getState().auth.uid;
+    var todosRef= firebaseRef.child("todos");
 
     return todosRef.once('value').then((snapshot)=>{
       var todos= snapshot.val()|| {};
@@ -72,6 +74,7 @@ export var startAddTodo = (text) => {
       text,
       completed: false
     };
+    var uid = getState().auth.uid;
     var todoRef= firebaseRef.child('todos').push(todo);
     return todoRef.then(()=>{
       dispatch(addTodo({
@@ -90,6 +93,18 @@ export var toggleShowCompleted = () => {
   }
 }
 //Actions are placed and now needed to add reducers to handle it
+export var login = (uid) => {
+  return {
+    type: 'LOGIN',
+    uid
+  };
+};
+
+export var logout = () => {
+  return {
+    type: 'LOGOUT'
+  };
+};
 
 export var startLogin= (username,password)=> {
   return (dispatch,getState) => {

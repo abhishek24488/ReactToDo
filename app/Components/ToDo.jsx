@@ -10,15 +10,7 @@ var Todo= createReactClass({
         var {completed,id , text,dispatch}=this.props;
         console.log(text);
         var todoClassName = completed ? 'todo todo-completed' : 'todo';
-        //console.log(text );
-       /*  var renderTodo =()=>{
-            return
-                (
-                    <div>
-                         {text}
-                    </div>
-                )
-        } */
+        
         return(
             <div className={todoClassName} onClick={()=>{
                    // this.props.onToggle(id); // It will pass the id in onToggle function 
