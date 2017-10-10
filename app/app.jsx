@@ -8,7 +8,7 @@ var {Provider}= require('react-redux');
 
 //debugger;
 import firebase from "../app/firebase/firebase";
-import history from "../app/History/history";
+import createBrowserHistory from "../app/History/history";
 import {Router, HashRouter, Route} from "react-router-dom";
 var ToDoApp= require('ToDoApp');
 var actions= require('actions');
@@ -17,6 +17,7 @@ var store= require('configureStore').configure();
 var TodoApi = require('TodoApi');
 var Login = require('Login');
 
+var history= createBrowserHistory
 
 firebase.auth().onAuthStateChanged((user)=>{
     if (user) {
