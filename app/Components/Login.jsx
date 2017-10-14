@@ -1,20 +1,20 @@
-var React =require('react');
-var {connect}= require('react-redux');
-var createReactClass  = require('create-react-class');
-var actions= require('actions');
-//import React from 'react';
-//import createReactClass from 'create-react-class';
-//import * as Redux from 'react-redux';
-//import * as actions from '../actions/actions';
+import React from 'react';
+import createReactClass from 'create-react-class';
+import * as Redux from 'react-redux';
+import * as actions from '../actions/actions';
 
-var Login= createReactClass({
+export class Login extends React.Component{
 
+  constructor (props) {
+    super(props);
+    this.onLogin = this.onLogin.bind(this);
+  }
     onLogin () {
         var {dispatch} = this.props;
         var username= this.refs.usr.value;
         var password = this.refs.pwd.value;
         dispatch(actions.startLogin(username,password));
-    },
+    }
   render () {
     return (
       <div>
@@ -36,7 +36,7 @@ var Login= createReactClass({
       </div>
     );
   }
-});
+};
 
-//export default Login;
-module.exports= connect()( Login);
+export default Redux.connect()(Login);;
+//module.exports= connect()( Login);

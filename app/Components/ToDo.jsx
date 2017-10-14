@@ -3,8 +3,8 @@ var {connect}= require('react-redux');
 var actions= require('actions');
 var createReactClass = require('create-react-class');
 
-var Todo= createReactClass({    
-    onFormSubmit: function(e){
+export class Todo extends React.Component{    
+    handleSubmit(e){
         e.preventDefault();
         var {dispatch,id , text}= this.props;
         //var newTask= this.refs.userTask.value;
@@ -17,16 +17,14 @@ var Todo= createReactClass({
             dispatch(actions.UpdateUserTak(id,newT)) ;
            //console.log(newTask);
         }       
-    },
-
-    onDelete: function(e){
-       // e.preventDefault();
-        
+    }
+    onDelete(e){
+       // e.preventDefault();        
         var {dispatch,id,text}= this.props;
         dispatch(actions.removeTodo(id));
         
-    },
-    render: function(){   
+    }
+    render(){   
         // We are fetching the text property using this.props
         var {completed,id , text,dispatch}=this.props;
         console.log(text);
@@ -41,20 +39,20 @@ var Todo= createReactClass({
                         <input type="checkbox" checked={completed}  onClick={()=>{
                             dispatch(actions.startToggleTodo(id, !completed));
                             }} onChange={()=>{}} />                      
-                        <form onSubmit={this.onFormSubmit}> 
+                        <form onSubmit={this.handleSubmit.bind(this)}> 
                             <input type="text" value= {text} ref="userTask" onChange={()=>{}}/>
                             <button className="button expanded">Edit your task</button>
                         </form>
                     </div>
                     <div>
-                        <form onSubmit={this.onDelete}>
+                        <form onSubmit={this.onDelete.bind(this)}>
                             <button className="button expanded">Delete your task</button>
                         </form> 
                     </div>            
             </div>
         )
     }
-});
+};
 
-//export default connect()(Todo);
-module.exports= connect()(Todo); //here todo component is needed to acces to its distach so by call connect it is avaible to its
+export default connect()(Todo);
+//module.exports= connect()(Todo); //here todo component is needed to acces to its distach so by call connect it is avaible to its

@@ -51,3 +51,8 @@ redux-thunk is middleware
 
 npm install --save node-env-file@0.1.8
 // create environment variable 
+
+heroku config
+//going to return all of the existing variable 
+
+>heroku config:set DATABASE_URL=https://abhi-todo.firebaseio.com

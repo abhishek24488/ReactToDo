@@ -1,86 +1,26 @@
-var React = require('react');
-var {connect}= require('react-redux');
-var createReactClass = require('create-react-class');
-var uuid= require('node-uuid');
+import React from 'react';
+import * as Redux from 'react-redux';
 
-var ToDoList= require('ToDoList');
-var AddTodo= require('AddTodo');
-var TodoSearch = require('TodoSearch');
-var actions= require('actions');
-//var TodoApi = require('TodoApi');
+import ToDoList from 'ToDoList'
+import AddTodo from 'AddTodo';
+import TodoSearch from 'TodoSearch';
+import * as actions from 'actions';
 
 
-var ToDoApp= createReactClass({
-    /* getInitialState: function(){
-        return {
-            showCompleted: true,// false because we only want to see todos which is not yet finished
-            searchText: '',// You need to return all the items no matter what the text is :)
-            todos: TodoApi.getTodos() // to fetch the todos            
-        };
-    }, */
-    // Its going fire after either props or states gonna change
-   /*  componentDidUpdate : function(){
-        //console.log(this.state.todos);
-        TodoApi.setTodos(this.state.todos);
-    },  */
-    /* handleAddTodo: function(newText){
-        //alert('Yours new Added todo' + newText);
-
-        this.setState({
-            todos:[
-                ...this.state.todos,
-                {
-                    id: uuid(),
-                    text: newText,
-                    completed: false
-                }
-            ]
-        })
-    }, */
-    /* handleToggle:function(id){
-        //alert(id);
-        // map function going to iterate all over the todo task
-        var updatedTodos= this.state.todos.map(function(todo){
-            if(todo.id === id){
-                todo.completed = !todo.completed;
-            }
-            return todo;            
-        });      
-        this.setState({
-            todos: updatedTodos
-        });  
-    }, */
-    /* handleSearch: function(showCompleted, searchText){
-            this.setState({
-                showCompleted:showCompleted,
-                searchText:searchText.toLowerCase()
-            }); */
-    /*var serachTodo= this.state.todos.map(function(todo){
-                if(todo.text === searchText){
-                    console.log(searchText);
-                }
-            }); 
-            
-            },*/
-
+export class TodoApp extends React.Component{
     onLogout(e){
         var {dispatch} = this.props;
         e.preventDefault();
         dispatch(actions.startLogout());
-    },
+    }
     
-    render: function(){        
-        //var {todos,searchText, showCompleted}= this.state; // grab the todos value using state property
-        //console.log(searchText);
-        //var filterTodos= TodoApi.filterTodos(todos,searchText, showCompleted);
-
-        //Its Important to return funtion 
+    render(){        
+       //Its Important to return funtion 
        return(
 
         <div>
             <div className="page-actions">
-                <a href="#" onClick={this.onLogout}>Logout</a> 
-               
+                <a href="#" onClick={this.onLogout}>Logout</a>                
             </div>
             <h1 className="page-title">Todo App</h1>
             <div className="row">
@@ -95,7 +35,7 @@ var ToDoApp= createReactClass({
         </div>
        )
     }
-});
+};
 
-//export default ToDoApp;
-module.exports=connect()(ToDoApp);
+export default Redux.connect()(TodoApp);
+//module.exports=connect()(ToDoApp);
