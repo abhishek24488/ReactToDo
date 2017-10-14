@@ -20,7 +20,7 @@ export class TodoApp extends React.Component{
 
         <div>
             <div className="page-actions">
-                <a href="#" onClick={this.onLogout}>Logout</a>                
+                <a href="#" onClick={this.onLogout.bind(this)}>Logout</a>                
             </div>
             <h1 className="page-title">Todo App</h1>
             <div className="row">

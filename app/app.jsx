@@ -19,8 +19,8 @@ var history= createBrowserHistory
 
 firebase.auth().onAuthStateChanged((user)=>{
     if (user) {
-        //store.dispatch(actions.login(user.uid));
-        store.dispatch(actions.startAddTodos());
+        store.dispatch(actions.login(user.uid));
+        store.dispatch(actions.startAddTodos());                 
         history.push('/todos');        
     } else {
         store.dispatch(actions.logout());

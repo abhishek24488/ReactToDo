@@ -1,62 +1,6 @@
 import firebase,{firebaseRef, githubProvider,provider} from "../firebase/firebase";
+import moment from 'moment';
 
-
-export var setSearchText= (searchText) => {
-  return { // action object
-    type: 'SET_SEARCH_TEXT',
-    searchText
-  };
-};
-
-// toggle completed todo
-
-export var startToggleTodo = (id, completed) => { 
-  return (dispatch, getState)=>{ 
-    //var uid = getState().auth.uid;
-    var todoRef = firebaseRef.child(`todos/${id}`);
-    var updates ={
-      completed
-    };
-    return todoRef.update(updates).then(()=>{
-      dispatch(updateTodo(id,updates));
-    });
-  };
-};
-
-export var UpdateUserTak = (id, text) => { 
-  return (dispatch, getState)=>{ 
-    //var uid = getState().auth.uid;
-    var todoRef = firebaseRef.child(`todos/${id}`);
-    var updates ={
-      text
-    };
-    return todoRef.update(updates).then(()=>{
-      dispatch(updateNewTodo(id,updates));
-    });
-  };
-};
-export var updateNewTodo= (id,newTask)=> {
-  return {
-    type : 'UPDATE NEWTASK',
-    id,
-    newTask
-  };
-};
-
-export var updateTodo = (id,updates) => { 
-  return { 
-    type: 'TOGGLE_TODO',
-    id,
-    updates
-  };
-};
-
-export var removeTodo= (id)=> {
-  return (dispatch, getState)=>{
-    var todoRef= firebaseRef.child(`todos/${id}`).remove();
-    }
-  //dispatch(actions.startAddTodos());
-};
 
 export var addTodo = (todo) => {
   return {
@@ -72,10 +16,35 @@ export var addTodos = (todos) => {
   };
 };
 
- export var startAddTodos = () => {
+export var removeTodo= (id)=> {
   return (dispatch, getState)=>{
-    //var uid = getState().auth.uid;
-    var todosRef= firebaseRef.child("todos");
+    var uid = getState().auth.uid;
+    var todoRef= firebaseRef.child(`users/${uid}/todos/${id}`).remove();
+    //console.log(todoRef);
+    }  
+};
+
+export var updateTodo = (id,updates) => { 
+  return { 
+    type: 'TOGGLE_TODO',
+    id,
+    updates
+  };
+};
+
+export var updateNewTodo= (id,updatesTask)=> {
+  return {
+    type : 'UPDATE NEWTASK',
+    id,
+    updatesTask
+  };
+};
+
+export var startAddTodos = () => {
+  return (dispatch, getState)=>{
+    var uid = getState().auth.uid;
+    console.log(uid);
+    var todosRef= firebaseRef.child(`users/${uid}/todos`);
 
     return todosRef.once('value').then((snapshot)=>{
       var todos= snapshot.val()|| {};
@@ -99,10 +68,14 @@ export var startAddTodo = (text) => {
       //id: uuid(),
       //text: action.text,
       text,
-      completed: false
+      completed: false,
+      updated:false,
+      createdAt: moment().unix(),
+      updatedAt: null,
+      completedAt: null
     };
     var uid = getState().auth.uid;
-    var todoRef= firebaseRef.child('todos').push(todo);
+    var todoRef= firebaseRef.child(`users/${uid}/todos`).push(todo);
     return todoRef.then(()=>{
       dispatch(addTodo({
         ...todo,
@@ -112,6 +85,36 @@ export var startAddTodo = (text) => {
   };
 }
 
+export var startToggleTodo = (id, completed) => { 
+  return (dispatch, getState)=>{ 
+    var uid = getState().auth.uid;
+    var todoRef = firebaseRef.child(`users/${uid}/todos/${id}`);
+    var updates ={
+      id,
+      completed,
+      completedAt: completed ? moment().unix() : null
+    };
+    return todoRef.update(updates).then(()=>{
+      dispatch(updateTodo(id,updates));
+    });
+  };
+};
+
+export var UpdateUserTak = (id, text,updated) => { 
+  return (dispatch, getState)=>{ 
+    var uid = getState().auth.uid;
+    var todoRef = firebaseRef.child(`users/${uid}/todos/${id}`);
+    var updatesTask ={
+      text,
+      updated,
+      updatedAt: updated ? moment().unix() : null
+    };
+    return todoRef.update(updatesTask).then(()=>{
+      dispatch(updateNewTodo(id,updatesTask));
+    });
+  };
+};
+
 //toggle Show Completed
 export var toggleShowCompleted = () => {
   return {
@@ -119,6 +122,15 @@ export var toggleShowCompleted = () => {
     
   }
 }
+export var setSearchText= (searchText) => {
+  return { // action object
+    type: 'SET_SEARCH_TEXT',
+    searchText
+  };
+};
+
+// toggle completed todo
+
 //Actions are placed and now needed to add reducers to handle it
 export var login = (uid) => {
   return {
@@ -141,8 +153,11 @@ export var startLogin= (username,password)=> {
     }, (error)=>{
       console.log("Unable to auth", error);
     }); */
+    var uid = getState().auth.uid;
     firebase.auth().signInWithEmailAndPassword(username,password).then((result)=>{
       console.log("Authentication Workd", result);
+      //dispatch(login(result.user.uid));
+      //dispatch(startAddTodos());
     }, (error)=>{
       console.log("Unable to auth", error);
     })
