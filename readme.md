@@ -48,3 +48,6 @@ npm install --save-dev babel-preset-stage-3
 npm install node-uuid --save-dev
 
 redux-thunk is middleware
+
+npm install --save node-env-file@0.1.8
+// create environment variable 
