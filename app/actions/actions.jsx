@@ -23,12 +23,39 @@ export var startToggleTodo = (id, completed) => {
   };
 };
 
+export var UpdateUserTak = (id, text) => { 
+  return (dispatch, getState)=>{ 
+    //var uid = getState().auth.uid;
+    var todoRef = firebaseRef.child(`todos/${id}`);
+    var updates ={
+      text
+    };
+    return todoRef.update(updates).then(()=>{
+      dispatch(updateNewTodo(id,updates));
+    });
+  };
+};
+export var updateNewTodo= (id,newTask)=> {
+  return {
+    type : 'UPDATE NEWTASK',
+    id,
+    newTask
+  };
+};
+
 export var updateTodo = (id,updates) => { 
   return { 
     type: 'TOGGLE_TODO',
     id,
     updates
   };
+};
+
+export var removeTodo= (id)=> {
+  return (dispatch, getState)=>{
+    var todoRef= firebaseRef.child(`todos/${id}`).remove();
+    }
+  //dispatch(actions.startAddTodos());
 };
 
 export var addTodo = (todo) => {

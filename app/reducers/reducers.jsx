@@ -31,6 +31,16 @@ export var todosReducer = (state = [], action ) => {
                 }  */ 
                 {...action.todo}
             ];
+        case 'REMOVE_TODO':
+            return state.map((todo)=>{
+                if(todo.id===action.id){
+                    return {
+                        
+                    };
+                }else{
+                    return todo;
+                }
+            });
 
         case 'TOGGLE_TODO':
             return state.map((todo) =>   {
@@ -49,12 +59,24 @@ export var todosReducer = (state = [], action ) => {
                     }              
             }); 
         
-            case 'ADD_TODOS':
+        case 'ADD_TODOS':
             return [
                 ...state,
                 ...action.todos
             ];
-            case 'LOGOUT':
+        case 'UPDATE NEWTASK':
+            return state.map((todo)=>{
+                if(todo.id=== action.id){
+                    return {
+                        ...todo,
+                        ...action.newTask
+                    };
+                } else{                    
+                    return todo;                     
+                    }
+            });
+            ;
+        case 'LOGOUT':
             return [];
           default:
             return state;

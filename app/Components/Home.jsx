@@ -4,9 +4,7 @@ var createReactClass= require('create-react-class');
 var VerifyUser= require('./VerifyUser');
 var ToDoApp= require('ToDoApp');
 
-var Home = createReactClass({
-
-    
+var Home = createReactClass({    
     handleSubmit: function(e){
         e.preventDefault();
         var username= this.refs.username.value;

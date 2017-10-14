@@ -4,7 +4,28 @@ var actions= require('actions');
 var createReactClass = require('create-react-class');
 
 var Todo= createReactClass({    
+    onFormSubmit: function(e){
+        e.preventDefault();
+        var {dispatch,id , text}= this.props;
+        //var newTask= this.refs.userTask.value;
+        //alert(newTask);
+        //
+       var newTask= prompt("Enter theh new todo");
+        if(newTask.length!=0){
+            this.refs.userTask.value= newTask;
+            var newT=this.refs.userTask.value;
+            dispatch(actions.UpdateUserTak(id,newT)) ;
+           //console.log(newTask);
+        }       
+    },
 
+    onDelete: function(e){
+       // e.preventDefault();
+        
+        var {dispatch,id,text}= this.props;
+        dispatch(actions.removeTodo(id));
+        
+    },
     render: function(){   
         // We are fetching the text property using this.props
         var {completed,id , text,dispatch}=this.props;
@@ -12,13 +33,24 @@ var Todo= createReactClass({
         var todoClassName = completed ? 'todo todo-completed' : 'todo';
         
         return(
-            <div className={todoClassName} onClick={()=>{
-                   // this.props.onToggle(id); // It will pass the id in onToggle function 
-                   dispatch(actions.startToggleTodo(id, !completed));
-                }} >
-                {/* {renderTodo()} */}
-                <input type="checkbox" checked={completed} onChange={()=>{}}/>
-                {text}
+
+            <div className={todoClassName} 
+                   // this.props.onToggle(id); // It will pass the id in onToggle function                  
+                >
+                    <div>
+                        <input type="checkbox" checked={completed}  onClick={()=>{
+                            dispatch(actions.startToggleTodo(id, !completed));
+                            }} onChange={()=>{}} />                      
+                        <form onSubmit={this.onFormSubmit}> 
+                            <input type="text" value= {text} ref="userTask" onChange={()=>{}}/>
+                            <button className="button expanded">Edit your task</button>
+                        </form>
+                    </div>
+                    <div>
+                        <form onSubmit={this.onDelete}>
+                            <button className="button expanded">Delete your task</button>
+                        </form> 
+                    </div>            
             </div>
         )
     }
